@@ -1,4 +1,5 @@
 var isOperatorExist = false;
+var isDot = false;
 document.addEventListener("DOMContentLoaded", function () {
   GenerateUI();
 });
@@ -75,13 +76,16 @@ function GenerateUI() {
             op = "";
             isOperatorExist = false;
             spOperator.innerHTML = "";
-
             break;
           case ".":
             if (txtDisplay.value == "0") {
               txtDisplay.value = "0.";
+              isDot = true;
             } else if (txtDisplay.value.indexOf(".") < 0) {
               txtDisplay.value += event.target.getAttribute("value");
+              isDot = true;
+            } else {
+              isDot = true;
             }
             break;
           case "&#247;":
@@ -114,8 +118,11 @@ function GenerateUI() {
               console.log("num1:" + num1);
               console.log("num2:" + num2);
               console.log("op:" + op);
-              if (num1.length > 0 && num2.length > 0 && op.length > 0)
+              if (num1.length > 0 && num2.length > 0 && op.length > 0) {
                 txtDisplay.value = calculate(num1, num2, op);
+                op = "";
+                isOperatorExist = false;
+              }
             }
             break;
           case "+/-":
@@ -126,16 +133,20 @@ function GenerateUI() {
             }
             break;
           default:
-            console.log("isOperatorExist:" + isOperatorExist);
             if (txtDisplay.value == "0") {
               txtDisplay.value = event.target.getAttribute("value");
             } else {
               if (isOperatorExist) {
-                txtDisplay.value = event.target.getAttribute("value");
+                if (isDot) {
+                  txtDisplay.value += event.target.getAttribute("value");
+                } else {
+                  txtDisplay.value = event.target.getAttribute("value");
+                }
               } else {
                 txtDisplay.value += event.target.getAttribute("value");
               }
             }
+            isDot = false;
             break;
         }
       }.bind(this);
@@ -150,18 +161,27 @@ function GenerateUI() {
 }
 
 function calculate(num1, num2, operator) {
+  let calc_num1, calc_num2;
+  if (num1.indexOf(".") > 0 || num2.indexOf(".") > 0) {
+    calc_num1 = parseFloat(num1);
+    calc_num2 = parseFloat(num2);
+  } else {
+    calc_num1 = parseInt(num1);
+    calc_num2 = parseInt(num2);
+  }
+
   switch (operator) {
     case "+":
-      return num1 + num2;
+      return calc_num1 + calc_num2;
       break;
     case "*":
-      return num1 * num2;
+      return calc_num1 * calc_num2;
       break;
     case "/":
-      return num1 / num2;
+      return calc_num1 / calc_num2;
       break;
     case "-":
-      return num1 - num2;
+      return calc_num1 - calc_num2;
       break;
   }
 }
