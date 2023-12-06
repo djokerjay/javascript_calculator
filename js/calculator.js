@@ -9,7 +9,7 @@ function GenerateUI() {
   const table = document.createElement("table");
   let op = "";
   let num1, num2;
-  table.border = "1";
+  //  table.border = "1";
   const trDisplay = document.createElement("tr");
   const tdDisplay = document.createElement("td");
   tdDisplay.colSpan = "3";
@@ -27,7 +27,6 @@ function GenerateUI() {
 
   tdOp.appendChild(spOperator);
   trDisplay.appendChild(tdOp);
-
   table.appendChild(trDisplay);
   const buttons = [
     "C",
@@ -116,6 +115,7 @@ function GenerateUI() {
                 txtDisplay.value = calculate(num1, num2, op);
                 op = "";
                 isOperatorExist = false;
+                spOperator.innerHTML = "";
               }
             }
             break;
