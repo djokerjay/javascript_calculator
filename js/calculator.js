@@ -93,7 +93,6 @@ function GenerateUI() {
             spOperator.innerHTML = event.target.getAttribute("value");
             num1 = txtDisplay.value;
             isOperatorExist = true;
-            console.log(op);
             break;
           case "x":
             op = "*";
@@ -101,7 +100,6 @@ function GenerateUI() {
 
             num1 = txtDisplay.value;
             isOperatorExist = true;
-            console.log(op);
             break;
           case "+":
           case "-":
@@ -110,14 +108,10 @@ function GenerateUI() {
 
             isOperatorExist = true;
             op = event.target.getAttribute("value");
-            console.log(op);
             break;
           case "=":
             if (txtDisplay.value.length > 0) {
               num2 = txtDisplay.value;
-              console.log("num1:" + num1);
-              console.log("num2:" + num2);
-              console.log("op:" + op);
               if (num1.length > 0 && num2.length > 0 && op.length > 0) {
                 txtDisplay.value = calculate(num1, num2, op);
                 op = "";
