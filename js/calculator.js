@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function GenerateUI() {
   const container = document.getElementById("container");
   const table = document.createElement("table");
-  let operator = "";
+  let op = "";
   let num1, num2;
   table.border = "1";
   const trDisplay = document.createElement("tr");
@@ -103,9 +103,9 @@ function GenerateUI() {
             break;
           case "+":
           case "-":
+            console.log(event.target.getAttribute("value"));
             num1 = txtDisplay.value;
-            spOperator.innerHTML = op;
-
+            spOperator.innerHTML = event.target.getAttribute("value");
             isOperatorExist = true;
             op = event.target.getAttribute("value");
             break;
