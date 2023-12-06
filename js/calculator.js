@@ -21,7 +21,7 @@ function GenerateUI() {
   txtDisplay.type = "text";
   txtDisplay.innerText = "0";
   txtDisplay.value = "0";
-  //  txtDisplay.disabled = true;
+  txtDisplay.disabled = true;
   tdDisplay.appendChild(txtDisplay);
   trDisplay.appendChild(tdDisplay);
 
